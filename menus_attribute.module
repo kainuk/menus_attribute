@@ -4,12 +4,11 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\menus_attribute\StorageHelper;
 
 /**
- * Implements hook_form_FORM_ID_alter(). menu_link_content_form_
+ * Implements hook_form_FORM_ID_alter().
  */
-
 function menus_attribute_form_alter(array &$form, FormStateInterface $form_state) {
   if ($form['#form_id'] == 'menu_link_content_menu_link_content_form' || $form['#form_id'] == 'menu_link_edit') {
-    $data = null;
+    $data = NULL;
     $get_path = explode("/",\Drupal::service('path.current')->getPath());
     if ($get_path[6] == 'edit') {
       if ($form['#form_id'] == 'menu_link_content_menu_link_content_form') {
@@ -27,76 +26,76 @@ function menus_attribute_form_alter(array &$form, FormStateInterface $form_state
         '#title' => t('Menu Link Attributes'),
     ];
     $form['menu_link_attributes']['menu_link_id'] = [
-        '#type' => 'textfield',
-        '#title' => t('ID'),
-        '#description' => t('Specifies a unique ID for the link.'),
-        '#default_value' => $data?$data->link_id:'',
+      '#type' => 'textfield',
+      '#title' => t('ID'),
+      '#description' => t('Specifies a unique ID for the link.'),
+      '#default_value' => $data ? $data->link_id : '',
     ];
     $form['menu_link_attributes']['menu_link_name'] = [
-        '#type' => 'textfield',
-        '#title' => t('Name'),
-        '#default_value' => $data?$data->link_name:'',
+      '#type' => 'textfield',
+      '#title' => t('Name'),
+      '#default_value' => $data ? $data->link_name : '',
     ];
     $form['menu_link_attributes']['menu_link_rel'] = [
-        '#type' => 'textfield',
-        '#title' => t('Relationship'),
-        '#description' => t('Specifies the relationship between the current page and the link. Enter \'nofollow\' here to nofollow this link.'),
-        '#default_value' => $data?$data->link_rel:'',
+      '#type' => 'textfield',
+      '#title' => t('Relationship'),
+      '#description' => t('Specifies the relationship between the current page and the link. Enter \'nofollow\' here to nofollow this link.'),
+      '#default_value' => $data ? $data->link_rel : '',
     ];
     $form['menu_link_attributes']['menu_link_class'] = [
-        '#type' => 'textfield',
-        '#title' => t('Classes'),
-        '#description' => t('Enter additional classes to be added to the link.'),
-        '#default_value' => $data?$data->link_classes:'',
+      '#type' => 'textfield',
+      '#title' => t('Classes'),
+      '#description' => t('Enter additional classes to be added to the link.'),
+      '#default_value' => $data ? $data->link_classes : '',
     ];
     $form['menu_link_attributes']['menu_link_style'] = [
-        '#type' => 'textfield',
-        '#title' => t('Style'),
-        '#description' => t('Enter additional styles to be applied to the link.'),
-        '#default_value' => $data?$data->link_style:'',
+      '#type' => 'textfield',
+      '#title' => t('Style'),
+      '#description' => t('Enter additional styles to be applied to the link.'),
+      '#default_value' => $data ? $data->link_style : '',
     ];
     $form['menu_link_attributes']['menu_link_target'] = [
-        '#type' => 'select',
-        '#title' => t('Target'),
-        '#description' => t('Specifies where to open the link. Using this attribute breaks XHTML validation.'),
-        '#options' => [
-            '' => 'None(ie.same window)',
-            '_blank' => 'New window (_blank)',
-            '_top' => 'Top window (_top)',
-            '_self' => 'Same window (_self)',
-            '_parent' => 'Parent window (_parent)',
-        ],
-        '#default_value' => $data?$data->link_target:'',
+      '#type' => 'select',
+      '#title' => t('Target'),
+      '#description' => t('Specifies where to open the link. Using this attribute breaks XHTML validation.'),
+      '#options' => [
+        '' => 'None(ie.same window)',
+        '_blank' => 'New window (_blank)',
+        '_top' => 'Top window (_top)',
+        '_self' => 'Same window (_self)',
+        '_parent' => 'Parent window (_parent)',
+      ],
+      '#default_value' => $data ? $data->link_target : '',
     ];
     $form['menu_link_attributes']['menu_link_access_key'] = [
-        '#type' => 'textfield',
-        '#title' => t('Access Key'),
-        '#size' => 1,
-        '#maxlength' => 1,
-        '#description' => t('Specifies a keyboard shortcut to access this link.'),
-        '#default_value' => $data?$data->link_accesskey:'',
+      '#type' => 'textfield',
+      '#title' => t('Access Key'),
+      '#size' => 1,
+      '#maxlength' => 1,
+      '#description' => t('Specifies a keyboard shortcut to access this link.'),
+      '#default_value' => $data ? $data->link_accesskey : '',
     ];
     $form['menu_item_attributes'] = [
-        '#type' => 'details',
-        '#title' => t('Menu Item Attributes'),
+      '#type' => 'details',
+      '#title' => t('Menu Item Attributes'),
     ];
     $form['menu_item_attributes']['menu_item_id'] = [
-        '#type' => 'textfield',
-        '#title' => t('ID'),
-        '#description' => t('Specifies a unique ID for the link.'),
-        '#default_value' => $data?$data->item_id:'',
+      '#type' => 'textfield',
+      '#title' => t('ID'),
+      '#description' => t('Specifies a unique ID for the link.'),
+      '#default_value' => $data ? $data->item_id : '',
     ];
     $form['menu_item_attributes']['menu_item_class'] = [
-        '#type' => 'textfield',
-        '#title' => t('Classes'),
-        '#description' => t('Enter additional classes to be added to the link.'),
-        '#default_value' => $data?$data->item_classes:'',
+      '#type' => 'textfield',
+      '#title' => t('Classes'),
+      '#description' => t('Enter additional classes to be added to the link.'),
+      '#default_value' => $data ? $data->item_classes : '',
     ];
     $form['menu_item_attributes']['menu_item_style'] = [
-        '#type' => 'textfield',
-        '#title' => t('Style'),
-        '#description' => t('Enter additional styles to be applied to the link.'),
-        '#default_value' => $data?$data->item_style:'',
+      '#type' => 'textfield',
+      '#title' => t('Style'),
+      '#description' => t('Enter additional styles to be applied to the link.'),
+      '#default_value' => $data ? $data->item_style : '',
     ];
     $form['actions']['submit']['#submit'][]  = '_menus_attribute_form_submit_handler';
     return $form;
@@ -121,7 +120,7 @@ function _menus_attribute_form_submit_handler(&$form, &$form_state) {
   foreach ($form_state->getValues() as $key => $value) {
       $temp[$key] = $value;
     }
-  (StorageHelper::exists($plugin_id))?(StorageHelper::update($temp,$plugin_id)):(StorageHelper::add($temp,$plugin_id));
+  (StorageHelper::exists($plugin_id)) ? (StorageHelper::update($temp,$plugin_id)) : (StorageHelper::add($temp,$plugin_id));
 }
 
 /**
