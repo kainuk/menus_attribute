@@ -14,7 +14,7 @@ use Drupal\menus_attribute\StorageHelper;
 function menus_attribute_form_alter(array &$form, FormStateInterface $form_state) {
   if ($form['#form_id'] == 'menu_link_content_menu_link_content_form' || $form['#form_id'] == 'menu_link_edit') {
     $data = NULL;
-    $get_path = explode("/" ,\Drupal::service('path.current')->getPath());
+    $get_path = explode("/", \Drupal::service('path.current')->getPath());
     if ($get_path[6] == 'edit') {
       if ($form['#form_id'] == 'menu_link_content_menu_link_content_form') {
         $id = $get_path[5];
@@ -106,7 +106,9 @@ function menus_attribute_form_alter(array &$form, FormStateInterface $form_state
     return $form;
   }
 }
-
+/**
+ * Submit handler.
+ */
 function _menus_attribute_form_submit_handler(&$form, &$form_state) {
   $get_path = explode("/", \Drupal::service('path.current')->getPath());
   if ($get_path[6] == 'edit') {
@@ -128,7 +130,7 @@ function _menus_attribute_form_submit_handler(&$form, &$form_state) {
 }
 
 /**
- * Implements hook_theme_registry_alter.
+ * Implements hook_theme_registry_alter().
  */
 function menus_attribute_theme_registry_alter(&$theme_registry) {
   $theme_registry['menu']['path'] = drupal_get_path('module', 'menus_attribute') . '/templates';
