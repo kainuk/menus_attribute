@@ -2,23 +2,32 @@
 
 namespace Drupal\menus_attribute;
 
-/*
+/**
  * Helper Class for database interraction
  */
 
 class StorageHelper {
 
-  public static function getData ($uuid){
+  /**
+  * function to getData.
+  */
+  public static function getData($uuid) {
     $result = db_query('SELECT * FROM {menus_attribute} WHERE plugin_id = :uuid', [':uuid' => $uuid])->fetchAll();
     return $result;
   }
 
-  public static function exists ($uuid) {
+  /**
+  * function to getData.
+  */
+  public static function exists($uuid) {
     $result = db_query('SELECT 1 FROM {menus_attribute} WHERE plugin_id = :uuid', [':uuid' => $uuid])->fetchField();
     return (bool) $result;
   }
 
-  public static function add (&$arr, $plugin_id) {
+  /**
+  * function to getData.
+  */
+  public static function add(&$arr, $plugin_id) {
     db_insert('menus_attribute')->fields(
       [
         'plugin_id' => $plugin_id,
@@ -36,6 +45,9 @@ class StorageHelper {
     )->execute();
   }
   
+  /**
+  * function to getData.
+  */
   public static function update(&$arr, $plugin_id) {
     $query = \Drupal::database()->update('menus_attribute');
     $query->fields(
@@ -56,4 +68,5 @@ class StorageHelper {
     $query->condition('plugin_id', $plugin_id);
     $query->execute();
   }
+  
 }
