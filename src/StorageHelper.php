@@ -1,12 +1,13 @@
 <?php
 
+namespace Drupal\menus_attribute;
+
 /*
  * Helper Class for database interraction
  */
-namespace Drupal\menus_attribute;
 
 class StorageHelper {
-  
+
   public static function getData ($uuid){
     $result = db_query('SELECT * FROM {menus_attribute} WHERE plugin_id = :uuid', [':uuid' => $uuid])->fetchAll();
     return $result;
@@ -55,8 +56,4 @@ class StorageHelper {
     $query->condition('plugin_id', $plugin_id);
     $query->execute();
   }
-  
-//  static function delete($id) {
-//    db_delete('bd_contact')->condition('id', $id)->execute();
-//  }
 }
