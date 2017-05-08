@@ -44,7 +44,7 @@ class StorageHelper {
       ]
     )->execute();
   }
-  
+
   /**
    * Function to update data.
    */
