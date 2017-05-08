@@ -5,7 +5,6 @@ namespace Drupal\menus_attribute;
 /**
  * Helper Class for database interaction.
  */
-
 class StorageHelper {
 
   /**
