@@ -44,7 +44,7 @@ function menus_attribute_form_alter(array &$form, FormStateInterface $form_state
     $form['menu_link_attributes']['menu_link_rel'] = [
       '#type' => 'textfield',
       '#title' => t('Relationship'),
-      '#description' => t('Specifies the relationship between the current page and the link. Enter \'nofollow\' here to nofollow this link.'),
+      '#description' => t("Specifies the relationship between the current page and the link. Enter 'nofollow' here to nofollow this link."),
       '#default_value' => $data ? $data->link_rel : '',
     ];
     $form['menu_link_attributes']['menu_link_class'] = [

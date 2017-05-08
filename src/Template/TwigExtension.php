@@ -24,7 +24,7 @@ class TwigExtension extends \Twig_Extension {
     return [
       new \Twig_SimpleFunction('menus_attribute', [$this, 'menusAttribute']),
       new \Twig_SimpleFunction('test_menu', [$this, 'test']),
-      ];
+    ];
   }
 
   /**
