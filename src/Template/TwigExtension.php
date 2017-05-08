@@ -22,11 +22,11 @@ class TwigExtension extends \Twig_Extension {
    */
   public function getFunctions() {
     return [
-      new \Twig_SimpleFunction('menus_attribute', array($this, 'menusAttribute')),
-      new \Twig_SimpleFunction('test_menu', array($this, 'test'))
+      new \Twig_SimpleFunction('menus_attribute', [$this, 'menusAttribute']),
+      new \Twig_SimpleFunction('test_menu', [$this, 'test']),
       ];
   }
-  
+
   /**
    * In this function we get data from Helper class.
    */
@@ -35,11 +35,11 @@ class TwigExtension extends \Twig_Extension {
   }
 
   /**
-   * returns added attributes for list 
+   * Returns added attributes for list.
    */
-  public function menusAttribute ($plugin_id) {
-    $attributes = null;
-    if(StorageHelper::exists($plugin_id)) {
+  public function menusAttribute($plugin_id) {
+    $attributes = NULL;
+    if (StorageHelper::exists($plugin_id)) {
       $data = StorageHelper::getData($plugin_id)[0];
       $attributes['id'] = $data->link_id;
       $attributes['name'] = $data->link_name;
