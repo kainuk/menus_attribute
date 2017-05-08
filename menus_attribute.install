@@ -1,12 +1,14 @@
 <?php
-
-/* 
- * This will create a table -> menus_attribute with the following feilds
+/**
+ * @file
+ * Provides functions for database.
  */
 
+/**
+ * This will create a table -> menus_attribute with the following feilds
+ */
 function menus_attribute_schema() {
-  
-  $schema['menus_attribute']=[
+  $schema['menus_attribute'] = [
       'fields' => [
           'id' => [
               'type' => 'serial',
