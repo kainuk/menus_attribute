@@ -23,7 +23,7 @@ function menus_attribute_form_alter(array &$form, FormStateInterface $form_state
       if ($form['#form_id'] == 'menu_link_edit') {
         $plugin_id = $get_path[5];
       }
-      if (StorageHelper::exists($plugin_id)){
+      if (StorageHelper::exists($plugin_id)) {
         $data = StorageHelper::getData($plugin_id)[0];
       }
     }
