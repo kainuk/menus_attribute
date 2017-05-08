@@ -7,7 +7,6 @@ use Drupal\menus_attribute\StorageHelper;
 /**
  * TwigExtension class returns menus attribute for each menu item and link.
  */
-
 class TwigExtension extends \Twig_Extension {
 
   /**
