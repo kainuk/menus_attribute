@@ -5,13 +5,7 @@
  */
 namespace Drupal\menus_attribute;
 
-class StorageHelper {
-
-//  static function getAll() {
-//    $result = db_query('SELECT * FROM {MyFormDb}')->fetchAllAssoc('id');
-//	return $result;
-//  }
-  
+class StorageHelper {  
   static function  getData($uuid){
     $result = db_query('SELECT * FROM {menus_attribute} WHERE plugin_id = :uuid', [':uuid' => $uuid])->fetchAll();
     return $result;

@@ -3,4 +3,3 @@ services:
     class: Drupal\menus_attribute\Template\TwigExtension
     tags:
       - { name: twig.extension }
-      

@@ -9,11 +9,11 @@ use Drupal\menus_attribute\StorageHelper;
 function menus_attribute_form_alter(array &$form, FormStateInterface $form_state) {
   if ($form['#form_id'] == 'menu_link_content_menu_link_content_form' || $form['#form_id'] == 'menu_link_edit') {
     $data = NULL;
-    $get_path = explode("/",\Drupal::service('path.current')->getPath());
+    $get_path = explode("/" ,\Drupal::service('path.current')->getPath());
     if ($get_path[6] == 'edit') {
       if ($form['#form_id'] == 'menu_link_content_menu_link_content_form') {
         $id = $get_path[5];
-        $plugin_id = \Drupal::entityManager()->getStorage('menu_link_content')->load($id)->getPluginId();  
+        $plugin_id = \Drupal::entityManager()->getStorage('menu_link_content')->load($id)->getPluginId();
       }
       if ($form['#form_id'] == 'menu_link_edit') {
         $plugin_id = $get_path[5];
@@ -22,8 +22,8 @@ function menus_attribute_form_alter(array &$form, FormStateInterface $form_state
         $data = StorageHelper::getData($plugin_id)[0];
     }
     $form['menu_link_attributes'] = [
-        '#type' => 'details',
-        '#title' => t('Menu Link Attributes'),
+      '#type' => 'details',
+      '#title' => t('Menu Link Attributes'),
     ];
     $form['menu_link_attributes']['menu_link_id'] = [
       '#type' => 'textfield',
@@ -97,36 +97,34 @@ function menus_attribute_form_alter(array &$form, FormStateInterface $form_state
       '#description' => t('Enter additional styles to be applied to the link.'),
       '#default_value' => $data ? $data->item_style : '',
     ];
-    $form['actions']['submit']['#submit'][]  = '_menus_attribute_form_submit_handler';
+    $form['actions']['submit']['#submit'][] = '_menus_attribute_form_submit_handler';
     return $form;
   }
 }
 
 function _menus_attribute_form_submit_handler(&$form, &$form_state) {
-  
-  $get_path=explode("/",\Drupal::service('path.current')->getPath());
+  $get_path = explode("/", \Drupal::service('path.current')->getPath());
   if ($get_path[6] == 'edit') {
     if ($form['#form_id'] == 'menu_link_content_menu_link_content_form') {
       $id = $get_path[5];
-      $plugin_id = \Drupal::entityManager()->getStorage('menu_link_content')->load($id)->getPluginId();  
+      $plugin_id = \Drupal::entityManager()->getStorage('menu_link_content')->load($id)->getPluginId();
     }
     if ($form['#form_id'] == 'menu_link_edit') {
       $plugin_id = $get_path[5];
-    }  
+    }
   }
   else {
-    $plugin_id = $form_state-> getBuildInfo()['callback_object']->getEntity()->getPluginId();
+    $plugin_id = $form_state->getBuildInfo()['callback_object']->getEntity()->getPluginId();
   }
   foreach ($form_state->getValues() as $key => $value) {
-      $temp[$key] = $value;
-    }
-  (StorageHelper::exists($plugin_id)) ? (StorageHelper::update($temp,$plugin_id)) : (StorageHelper::add($temp,$plugin_id));
+    $temp[$key] = $value;
+  }
+  (StorageHelper::exists($plugin_id)) ? (StorageHelper::update($temp, $plugin_id)) : (StorageHelper::add($temp, $plugin_id));
 }
 
 /**
- * Implements hook_theme_registry_alter
+ * Implements hook_theme_registry_alter.
  */
 function menus_attribute_theme_registry_alter(&$theme_registry) {
   $theme_registry['menu']['path'] = drupal_get_path('module', 'menus_attribute') . '/templates';
 }
-
