@@ -15,19 +15,19 @@ use Drupal\menus_attribute\StorageHelper;
 
 function menus_attribute_form_alter(array &$form, FormStateInterface $form_state){
   
-  if($form['#form_id']=='menu_link_content_menu_link_content_form' || $form['#form_id']=='menu_link_edit'){
-    $data=null;
-    $get_path=explode("/",\Drupal::service('path.current')->getPath());
-    if($get_path[6]=='edit'){
-      if($form['#form_id']=='menu_link_content_menu_link_content_form'){
+  if($form['#form_id'] == 'menu_link_content_menu_link_content_form' || $form['#form_id'] == 'menu_link_edit'){
+    $data = null;
+    $get_path = explode("/",\Drupal::service('path.current')->getPath());
+    if($get_path[6] == 'edit'){
+      if($form['#form_id'] == 'menu_link_content_menu_link_content_form'){
         $id = $get_path[5];
         $plugin_id = \Drupal::entityManager()->getStorage('menu_link_content')->load($id)->getPluginId();  
       }
-      if($form['#form_id']=='menu_link_edit'){
+      if($form['#form_id'] == 'menu_link_edit'){
         $plugin_id = $get_path[5];
       }
       if(StorageHelper::exists($plugin_id))
-        $data=StorageHelper::getData($plugin_id)[0];
+        $data = StorageHelper::getData($plugin_id)[0];
     }
     $form['menu_link_attributes'] = [
         '#type' => 'details',
@@ -113,12 +113,12 @@ function menus_attribute_form_alter(array &$form, FormStateInterface $form_state
 function _menus_attribute_form_submit_handler(&$form, &$form_state){
   
   $get_path=explode("/",\Drupal::service('path.current')->getPath());
-  if($get_path[6]=='edit'){
-    if($form['#form_id']=='menu_link_content_menu_link_content_form'){
+  if($get_path[6] == 'edit'){
+    if($form['#form_id'] == 'menu_link_content_menu_link_content_form'){
       $id = $get_path[5];
       $plugin_id = \Drupal::entityManager()->getStorage('menu_link_content')->load($id)->getPluginId();  
     }
-    if($form['#form_id']=='menu_link_edit'){
+    if($form['#form_id'] == 'menu_link_edit'){
       $plugin_id = $get_path[5];
     }  
   }
@@ -126,7 +126,7 @@ function _menus_attribute_form_submit_handler(&$form, &$form_state){
     $plugin_id = $form_state-> getBuildInfo()['callback_object']->getEntity()->getPluginId();
   }
   foreach ($form_state->getValues() as $key => $value) {
-      $temp[$key]= $value;
+      $temp[$key] = $value;
     }
   (StorageHelper::exists($plugin_id))?(StorageHelper::update($temp,$plugin_id)):(StorageHelper::add($temp,$plugin_id));
 }
