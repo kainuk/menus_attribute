@@ -29,27 +29,49 @@ class TwigExtension extends \Twig_Extension {
   /**
    * In this function we get data from Helper class.
    */
-  public function test($id) {
-    return StorageHelper::getData($id)[0]->id;
-  }
+//  public function test($id) {
+//    return StorageHelper::getData($id)[0]->id;
+//  }
 
   /**
    * Returns added attributes for list.
    */
   public function menusAttribute($plugin_id) {
+    $instance=StorageHelper::Instance();
     $attributes = NULL;
     if (StorageHelper::exists($plugin_id)) {
-      $data = StorageHelper::getData($plugin_id)[0];
-      $attributes['id'] = $data->link_id;
-      $attributes['name'] = $data->link_name;
-      $attributes['rel'] = $data->link_rel;
-      $attributes['class'] = $data->link_classes;
-      $attributes['style'] = $data->link_style;
-      $attributes['target'] = $data->link_target;
-      $attributes['accesskey'] = $data->link_accesskey;
-      $attributes['item_id'] = $data->item_id;
-      $attributes['item_class'] = $data->item_classes;
-      $attributes['item_style'] = $data->item_style;
+      $data = $instance->getData($plugin_id);
+      kint($data);
+      if ($data->link_id) {
+        $attributes['link']['id'] = $data->link_id;
+      }
+      if ($data->link_name) {
+        $attributes['link']['name'] = $data->link_name;
+      }
+      if ($data->link_rel) {  
+        $attributes['link']['rel'] = $data->link_rel;
+      }
+      if ($data->link_classes) {
+        $attributes['link']['class'] = $data->link_classes;
+      }
+      if ($data->link_style) {
+        $attributes['link']['style'] = $data->link_style;
+      }
+      if ($data->link_target) {
+        $attributes['link']['target'] = $data->link_target;
+      }
+      if ($data->link_accesskey) {
+        $attributes['link']['accesskey'] = $data->link_accesskey;
+      }
+      if ($data->item_id) {
+        $attributes['item']['id'] = $data->item_id;
+      }
+      if ($data->item_classes) {
+        $attributes['item']['class'] = $data->item_classes;
+      }
+      if ($data->item_style) {
+        $attributes['item']['style'] = $data->item_style;
+      }
     }
     return $attributes;
   }

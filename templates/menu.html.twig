@@ -26,10 +26,7 @@
   @see http://twig.sensiolabs.org/doc/tags/macro.html
 #}
 {{ menus.menu_links(items, attributes, 0) }}
-
-{% macro menu_links(items, attributes, menu_level) %}
-  {# kint(items|keys) #}
-  
+{% macro menu_links(items, attributes, menu_level) %}  
   {% import _self as menus %}
   {% if items %}
     {% if menu_level == 0 %}
@@ -39,52 +36,25 @@
     {% endif %}
      
     {% for item in items %}
-   {#  {{ kint(test_menu(items|keys[loop.index0])) }}#}
+      {% set menu_attributes = menus_attribute(items|keys[loop.index0]) %}
       {%
         set classes = [
           'menu-item',
           item.is_expanded ? 'menu-item--expanded',
           item.is_collapsed ? 'menu-item--collapsed',
           item.in_active_trail ? 'menu-item--active-trail',
+          menu_attributes.item.class ? menu_attributes.item.class
         ]
       %}
-      {% set my_menu_attributes = menus_attribute(items|keys[loop.index0]) %}
-      {% set menu_attributes=[]  %}
-      {% if my_menu_attributes %}
-        {% if my_menu_attributes['id'] %}
-          {% set menu_attributes= { id : my_menu_attributes['id'] } %}
-        {% endif %}
-        {% if my_menu_attributes['name'] %}
-          {% set menu_attributes=menu_attributes|merge({ name : my_menu_attributes['name'] }) %}
-        {% endif %}
-        {% if my_menu_attributes['rel'] %}
-          {% set menu_attributes=menu_attributes|merge({ rel : my_menu_attributes['rel'] }) %}
-        {% endif %}
-        {% if my_menu_attributes['target'] %}
-          {% set menu_attributes=menu_attributes|merge({ target : my_menu_attributes['target'] }) %}
-        {% endif %}
-        {% if my_menu_attributes['style'] %}
-          {% set menu_attributes=menu_attributes|merge({ style : my_menu_attributes['style'] }) %}
-        {% endif %}
-        {% if my_menu_attributes['accesskey'] %}
-          {% set menu_attributes=menu_attributes|merge({ accesskey : my_menu_attributes['accesskey'] }) %}
-        {% endif %}
-        {% if my_menu_attributes['class'] %}
-          {% set menu_attributes=menu_attributes|merge({ class : my_menu_attributes['class'] }) %}
-        {% endif %}
-        {% if my_menu_attributes['item_class'] %}
-          {% set classes = classes|merge([my_menu_attributes['item_class']]) %}
-        {% endif %} 
-      {% endif %}
       <li{{ item.attributes.addClass(classes) }}
-        {% if my_menu_attributes['item_id'] %}
-          {{ item.attributes.setAttribute('id', my_menu_attributes['item_id']) }}
+        {% if menu_attributes.item.id %}
+          {{ item.attributes.setAttribute('id', menu_attributes.item.id) }}
         {% endif %}
-        {% if my_menu_attributes['item_style'] %}
-          {{ item.attributes.setAttribute('style',my_menu_attributes['item_style']) }}
+        {% if menu_attributes.item.style %}
+          {{ item.attributes.setAttribute('style', menu_attributes.item.style) }}
         {% endif %}
       >
-        {{ link(item.title, item.url, menu_attributes) }}
+        {{ link(item.title, item.url, menu_attributes.link) }}
         {% if item.below %}
           {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
         {% endif %}

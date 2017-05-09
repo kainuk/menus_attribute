@@ -6,19 +6,39 @@ namespace Drupal\menus_attribute;
  * Helper Class for database interaction.
  */
 class StorageHelper {
-
+  
+  public $db;
+  
+  public static function Instance()
+  {
+    static $inst = NULL;
+    if ($inst === NULL) {
+      $inst = new StorageHelper();
+    }
+    return $inst;
+  }
+  
+  public function __construct() {
+    $this->db = \Drupal::database();
+  }
+  
   /**
    * Function to getData.
    */
-  public static function getData($uuid) {
-    $result = db_query('SELECT * FROM {menus_attribute} WHERE plugin_id = :uuid', [':uuid' => $uuid])->fetchAll();
-    return $result;
+  public function getData($plugin_id) {
+    $data = $this->db->select('menus_attribute','ma')
+            ->fields('ma')
+            ->condition('plugin_id',$plugin_id,'=')
+            ->execute()->fetchObject();
+    return $data;
   }
 
   /**
    * Function to check existence of a menu in our table.
    */
-  public static function exists($uuid) {
+  public static function exists($plugin_id) {
+    $data = $this->db->select('menus_attribute')
+            ->condition('plugin_id', $plugin_id,'=')->
     $result = db_query('SELECT 1 FROM {menus_attribute} WHERE plugin_id = :uuid', [':uuid' => $uuid])->fetchField();
     return (bool) $result;
   }
