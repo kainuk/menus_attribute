@@ -30,7 +30,7 @@ class TwigExtension extends \Twig_Extension {
    * Returns added attributes for list.
    */
   public function menusAttribute($plugin_id) {
-    $instance=StorageHelper::Instance();
+    $instance = StorageHelper::instance();
     $attributes = NULL;
     if ($instance->exists($plugin_id)) {
       $data = $instance->getData($plugin_id);
@@ -40,7 +40,7 @@ class TwigExtension extends \Twig_Extension {
       if ($data->link_name) {
         $attributes['link']['name'] = $data->link_name;
       }
-      if ($data->link_rel) {  
+      if ($data->link_rel) {
         $attributes['link']['rel'] = $data->link_rel;
       }
       if ($data->link_classes) {

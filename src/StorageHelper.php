@@ -6,10 +6,13 @@ namespace Drupal\menus_attribute;
  * Helper Class for database interaction.
  */
 class StorageHelper {
-  
+
   public $db;
-  
-  public static function Instance()
+
+  /**
+   * Function to create object of storage helper class.
+   */
+  public static function instance()
   {
     static $inst = NULL;
     if ($inst === NULL) {
@@ -17,19 +20,22 @@ class StorageHelper {
     }
     return $inst;
   }
-  
+
+   /**
+   * Constructor of storage helper class.
+   */
   public function __construct() {
     $this->db = \Drupal::database();
   }
-  
+
   /**
    * Function to getData.
    */
   public function getData($plugin_id) {
-    $data = $this->db->select('menus_attribute','ma')
-            ->fields('ma')
-            ->condition('plugin_id',$plugin_id,'=')
-            ->execute()->fetchObject();
+    $data = $this->db->select('menus_attribute', 'ma')
+      ->fields('ma')
+      ->condition('plugin_id', $plugin_id,'=')
+      ->execute()->fetchObject();
     return $data;
   }
 
@@ -37,10 +43,10 @@ class StorageHelper {
    * Function to check existence of a menu in our table.
    */
   public function exists($plugin_id) {
-    $data = $this->db->select('menus_attribute','ma')
-            ->fields('ma')
-            ->condition('plugin_id', $plugin_id,'=')
-            ->execute()->fetchField();
+    $data = $this->db->select('menus_attribute', 'ma')
+      ->fields('ma')
+      ->condition('plugin_id', $plugin_id, '=')
+      ->execute()->fetchField();
     return (bool) $data;
   }
 
