@@ -27,21 +27,13 @@ class TwigExtension extends \Twig_Extension {
   }
 
   /**
-   * In this function we get data from Helper class.
-   */
-//  public function test($id) {
-//    return StorageHelper::getData($id)[0]->id;
-//  }
-
-  /**
    * Returns added attributes for list.
    */
   public function menusAttribute($plugin_id) {
     $instance=StorageHelper::Instance();
     $attributes = NULL;
-    if (StorageHelper::exists($plugin_id)) {
+    if ($instance->exists($plugin_id)) {
       $data = $instance->getData($plugin_id);
-      kint($data);
       if ($data->link_id) {
         $attributes['link']['id'] = $data->link_id;
       }

@@ -34,7 +34,6 @@
     {% else %}
       <ul class="menu">
     {% endif %}
-     
     {% for item in items %}
       {% set menu_attributes = menus_attribute(items|keys[loop.index0]) %}
       {%

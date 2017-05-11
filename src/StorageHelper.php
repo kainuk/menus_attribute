@@ -36,18 +36,20 @@ class StorageHelper {
   /**
    * Function to check existence of a menu in our table.
    */
-  public static function exists($plugin_id) {
-    $data = $this->db->select('menus_attribute')
-            ->condition('plugin_id', $plugin_id,'=')->
-    $result = db_query('SELECT 1 FROM {menus_attribute} WHERE plugin_id = :uuid', [':uuid' => $uuid])->fetchField();
-    return (bool) $result;
+  public function exists($plugin_id) {
+    $data = $this->db->select('menus_attribute','ma')
+            ->fields('ma')
+            ->condition('plugin_id', $plugin_id,'=')
+            ->execute()->fetchField();
+    return (bool) $data;
   }
 
   /**
    * Function to add data.
    */
-  public static function add(&$arr, $plugin_id) {
-    db_insert('menus_attribute')->fields(
+  public function add(&$arr, $plugin_id) {
+    $query = $this->db->insert('menus_attribute');
+    $query->fields(
       [
         'plugin_id' => $plugin_id,
         'link_id' => $arr['menu_link_id'],
@@ -67,8 +69,8 @@ class StorageHelper {
   /**
    * Function to update data.
    */
-  public static function update(&$arr, $plugin_id) {
-    $query = \Drupal::database()->update('menus_attribute');
+  public function update(&$arr, $plugin_id) {
+    $query = $this->db->update('menus_attribute');
     $query->fields(
       [
         'plugin_id' => $plugin_id,

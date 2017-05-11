@@ -24,7 +24,7 @@ function menus_attribute_form_alter(array &$form, FormStateInterface $form_state
       if ($form['#form_id'] == 'menu_link_edit') {
         $plugin_id = $get_path[5];
       }
-      if (StorageHelper::exists($plugin_id)) {
+      if ($instance->exists($plugin_id)) {
         $data = $instance->getData($plugin_id);
       }
     }
@@ -113,6 +113,7 @@ function menus_attribute_form_alter(array &$form, FormStateInterface $form_state
  * Submit handler.
  */
 function _menus_attribute_form_submit_handler(&$form, &$form_state) {
+    $instance=StorageHelper::Instance();
   $get_path = explode("/", \Drupal::service('path.current')->getPath());
   if ($get_path[6] == 'edit') {
     if ($form['#form_id'] == 'menu_link_content_menu_link_content_form') {
@@ -129,7 +130,7 @@ function _menus_attribute_form_submit_handler(&$form, &$form_state) {
   foreach ($form_state->getValues() as $key => $value) {
     $temp[$key] = $value;
   }
-  (StorageHelper::exists($plugin_id)) ? (StorageHelper::update($temp, $plugin_id)) : (StorageHelper::add($temp, $plugin_id));
+  ($instance->exists($plugin_id)) ? ($instance->update($temp, $plugin_id)) : ($instance->add($temp, $plugin_id));
 }
 
 /**
