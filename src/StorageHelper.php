@@ -12,8 +12,7 @@ class StorageHelper {
   /**
    * Function to create object of storage helper class.
    */
-  public static function instance()
-  {
+  public static function instance() {
     static $inst = NULL;
     if ($inst === NULL) {
       $inst = new StorageHelper();
@@ -21,7 +20,7 @@ class StorageHelper {
     return $inst;
   }
 
-   /**
+  /**
    * Constructor of storage helper class.
    */
   public function __construct() {
@@ -34,7 +33,7 @@ class StorageHelper {
   public function getData($plugin_id) {
     $data = $this->db->select('menus_attribute', 'ma')
       ->fields('ma')
-      ->condition('plugin_id', $plugin_id,'=')
+      ->condition('plugin_id', $plugin_id, '=')
       ->execute()->fetchObject();
     return $data;
   }
