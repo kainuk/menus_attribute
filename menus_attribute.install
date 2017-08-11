@@ -20,6 +20,11 @@ function menus_attribute_schema() {
         'length' => 128,
         'not null' => TRUE,
       ],
+      'link_title' => [
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+      ],
       'link_id' => [
         'type' => 'varchar',
         'length' => 128,
