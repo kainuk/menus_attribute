@@ -33,7 +33,8 @@ class TwigExtension extends AbstractExtension  {
    */
   public function menusAttribute($plugin_id) {
     $instance = StorageHelper::instance();
-    $attributes = NULL;
+    $attributes = [];
+
     if ($instance->exists($plugin_id)) {
       $data = $instance->getData($plugin_id);
       if ($data->link_id) {
