@@ -143,5 +143,5 @@ function _menus_attribute_form_submit_handler(&$form, &$form_state) {
  * Implements hook_theme_registry_alter().
  */
 function menus_attribute_theme_registry_alter(&$theme_registry) {
-  $theme_registry['menu']['path'] = drupal_get_path('module', 'menus_attribute') . '/templates';
+  $theme_registry['menu']['path'] = \Drupal::service('extension.list.module')->getPath('menus_attribute') . '/templates';
 }

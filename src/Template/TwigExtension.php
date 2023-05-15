@@ -2,12 +2,14 @@
 
 namespace Drupal\menus_attribute\Template;
 
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 use Drupal\menus_attribute\StorageHelper;
 
 /**
  * TwigExtension class returns menus attribute for each menu item and link.
  */
-class TwigExtension extends \Twig_Extension {
+class TwigExtension extends AbstractExtension  {
 
   /**
    * In this function we define a twig extension name.
@@ -21,8 +23,8 @@ class TwigExtension extends \Twig_Extension {
    */
   public function getFunctions() {
     return [
-      new \Twig_SimpleFunction('menus_attribute', [$this, 'menusAttribute']),
-      new \Twig_SimpleFunction('test_menu', [$this, 'test']),
+      new TwigFunction('menus_attribute', [$this, 'menusAttribute']),
+      new TwigFunction('test_menu', [$this, 'test']),
     ];
   }
 
