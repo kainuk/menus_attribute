@@ -9,19 +9,19 @@ use Drupal\menus_attribute\StorageHelper;
 /**
  * TwigExtension class returns menus attribute for each menu item and link.
  */
-class TwigExtension extends AbstractExtension  {
+class TwigExtension extends AbstractExtension {
 
   /**
    * In this function we define a twig extension name.
    */
-  public function getName() {
+  public function getName(): string {
     return 'menus_attribute';
   }
 
   /**
    * In this function we can declare the extension function.
    */
-  public function getFunctions() {
+  public function getFunctions(): array {
     return [
       new TwigFunction('menus_attribute', [$this, 'menusAttribute']),
       new TwigFunction('test_menu', [$this, 'test']),
@@ -31,7 +31,7 @@ class TwigExtension extends AbstractExtension  {
   /**
    * Returns added attributes for list.
    */
-  public function menusAttribute($plugin_id) {
+  public function menusAttribute($plugin_id): array {
     $instance = StorageHelper::instance();
     $attributes = [];
 
@@ -71,6 +71,7 @@ class TwigExtension extends AbstractExtension  {
         $attributes['item']['style'] = $data->item_style;
       }
     }
+
     return $attributes;
   }
 

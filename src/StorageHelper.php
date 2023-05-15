@@ -2,6 +2,7 @@
 
 namespace Drupal\menus_attribute;
 
+use Drupal\Core\Database\Connection;
 use Drupal\Core\Database\Database;
 
 /**
@@ -9,16 +10,23 @@ use Drupal\Core\Database\Database;
  */
 class StorageHelper {
 
-  public $db;
+  /**
+   * The database connection service.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  public Connection $db;
 
   /**
    * Function to create object of storage helper class.
    */
-  public static function instance() {
+  public static function instance(): ?StorageHelper {
     static $inst = NULL;
+
     if ($inst === NULL) {
       $inst = new StorageHelper();
     }
+
     return $inst;
   }
 
@@ -33,11 +41,12 @@ class StorageHelper {
    * Function to getData.
    */
   public function getData($plugin_id) {
-    $data = $this->db->select('menus_attribute', 'ma')
+    return $this
+      ->db
+      ->select('menus_attribute', 'ma')
       ->fields('ma')
       ->condition('plugin_id', $plugin_id, '=')
       ->execute()->fetchObject();
-    return $data;
   }
 
   /**
@@ -53,8 +62,10 @@ class StorageHelper {
 
   /**
    * Function to add data.
+   *
+   * @throws \Exception
    */
-  public function add(&$arr, $plugin_id) {
+  public function add(&$arr, $plugin_id): void {
     $query = $this->db->insert('menus_attribute');
     $query->fields(
       [
@@ -77,7 +88,7 @@ class StorageHelper {
   /**
    * Function to update data.
    */
-  public function update(&$arr, $plugin_id) {
+  public function update(&$arr, $plugin_id): void {
     $query = $this->db->update('menus_attribute');
     $query->fields(
       [

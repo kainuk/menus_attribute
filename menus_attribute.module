@@ -11,7 +11,7 @@ use Drupal\menus_attribute\StorageHelper;
 /**
  * Implements hook_form_FORM_ID_alter().
  */
-function menus_attribute_form_alter(array &$form, FormStateInterface $form_state) {
+function menus_attribute_form_alter(array &$form, FormStateInterface $form_state): array {
   if ($form['#form_id'] == 'menu_link_content_menu_link_content_form' || $form['#form_id'] == 'menu_link_edit') {
     $instance = StorageHelper::instance();
     $data = NULL;
@@ -72,11 +72,11 @@ function menus_attribute_form_alter(array &$form, FormStateInterface $form_state
       '#title' => t('Target'),
       '#description' => t('Specifies where to open the link. Using this attribute breaks XHTML validation.'),
       '#options' => [
-        '' => 'None(ie.same window)',
-        '_blank' => 'New window (_blank)',
-        '_top' => 'Top window (_top)',
-        '_self' => 'Same window (_self)',
-        '_parent' => 'Parent window (_parent)',
+        '' => t('None(ie.same window)'),
+        '_blank' => t('New window (_blank)'),
+        '_top' => t('Top window (_top)'),
+        '_self' => t('Same window (_self)'),
+        '_parent' => t('Parent window (_parent)'),
       ],
       '#default_value' => $data ? $data->link_target : '',
     ];
@@ -111,16 +111,19 @@ function menus_attribute_form_alter(array &$form, FormStateInterface $form_state
       '#default_value' => $data ? $data->item_style : '',
     ];
     $form['actions']['submit']['#submit'][] = '_menus_attribute_form_submit_handler';
-    return $form;
   }
+
+  return $form;
 }
 
 /**
  * Submit handler.
  */
-function _menus_attribute_form_submit_handler(&$form, &$form_state) {
+function _menus_attribute_form_submit_handler(&$form, &$form_state): void {
+  $plugin_id = NULL;
   $instance = StorageHelper::instance();
   $get_path = explode("/", \Drupal::service('path.current')->getPath());
+
   if ($get_path[6] == 'edit') {
     if ($form['#form_id'] == 'menu_link_content_menu_link_content_form') {
       $id = $get_path[5];
@@ -133,15 +136,19 @@ function _menus_attribute_form_submit_handler(&$form, &$form_state) {
   else {
     $plugin_id = $form_state->getBuildInfo()['callback_object']->getEntity()->getPluginId();
   }
+
   foreach ($form_state->getValues() as $key => $value) {
     $temp[$key] = $value;
   }
-  ($instance->exists($plugin_id)) ? ($instance->update($temp, $plugin_id)) : ($instance->add($temp, $plugin_id));
+
+  if (!is_null($plugin_id)) {
+    ($instance->exists($plugin_id)) ? ($instance->update($temp, $plugin_id)) : ($instance->add($temp, $plugin_id));
+  }
 }
 
 /**
  * Implements hook_theme_registry_alter().
  */
-function menus_attribute_theme_registry_alter(&$theme_registry) {
+function menus_attribute_theme_registry_alter(&$theme_registry): void {
   $theme_registry['menu']['path'] = \Drupal::service('extension.list.module')->getPath('menus_attribute') . '/templates';
 }
