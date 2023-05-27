@@ -7,6 +7,25 @@
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\menus_attribute\StorageHelper;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function menus_attribute_help($route_name, RouteMatchInterface $route_match) {
+  $output = '';
+  switch ($route_name) {
+    case 'help.page.menus_attribute':
+      $output .= '<h3>' . t('About Menus Attribute') . '</h3>';
+      $output .= '<p>' . t('The Menus Attribute module provides additional attributes and functionality for Drupal menus. It allows you to add custom attributes to menu links and provides options for customizing the menu rendering.') . '</p>';
+      $output .= '<h3>' . t('Custom Attributes for Menu Links') . '</h3>';
+      $output .= '<p>' . t('With Menus Attribute, you can define custom attributes for menu links, such as "class", "id", "data-*", or any other valid HTML attribute. This allows you to enhance the styling and behavior of menu items using custom CSS or JavaScript.') . '</p>';
+      $output .= '<h3>' . t('Menu Rendering Options') . '</h3>';
+      $output .= '<p>' . t('The module also provides options for customizing the menu rendering, such as adding additional wrapper elements, applying specific CSS classes, or modifying the default menu item markup.') . '</p>';
+      break;
+  }
+  return $output;
+}
 
 /**
  * Implements hook_form_FORM_ID_alter().
