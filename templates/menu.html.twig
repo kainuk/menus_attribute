@@ -52,6 +52,9 @@
         {% if menu_attributes.item.style %}
           {{ item.attributes.setAttribute('style', menu_attributes.item.style) }}
         {% endif %}
+        {% if menu_attributes.item.role %}
+          {{ item.attributes.setAttribute('role', menu_attributes.item.role) }}
+        {% endif %}
       >
         {{ link(item.title, item.url, menu_attributes) }}
         {% if item.below %}

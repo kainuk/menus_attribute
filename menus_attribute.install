@@ -65,8 +65,24 @@ function menus_attribute_schema() {
         'type' => 'varchar',
         'length' => 128,
       ],
+      'item_role' => [
+        'type' => 'varchar',
+        'length' => 128,
+      ],
     ],
     'primary key' => ['id'],
   ];
   return $schema;
+}
+
+/**
+ * Add role attribute to menu items.
+ */
+function menus_attribute_update_10001(&$sandbox) {
+  $spec = [
+    'type' => 'varchar',
+    'length' => 128,
+  ];
+ $schema = Database::getConnection()->schema();
+ $schema->addField('menus_attribute', 'item_role', $spec);
 }
