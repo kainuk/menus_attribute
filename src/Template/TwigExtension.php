@@ -70,6 +70,9 @@ class TwigExtension extends AbstractExtension {
       if ($data->item_style) {
         $attributes['item']['style'] = $data->item_style;
       }
+      if ($data->item_role) {
+        $attributes['item']['role'] = $data->item_role;
+      }
     }
 
     return $attributes;

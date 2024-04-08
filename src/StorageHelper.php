@@ -81,6 +81,7 @@ class StorageHelper {
         'item_id' => $arr['menu_item_id'],
         'item_classes' => $arr['menu_item_class'],
         'item_style' => $arr['menu_item_style'],
+        'item_role' => $arr['menu_item_role'],
       ]
     )->execute();
   }
@@ -104,6 +105,7 @@ class StorageHelper {
         'item_id' => $arr['menu_item_id'],
         'item_classes' => $arr['menu_item_class'],
         'item_style' => $arr['menu_item_style'],
+        'item_role' => $arr['menu_item_role'],
       ]
     );
     $query->condition('plugin_id', $plugin_id);

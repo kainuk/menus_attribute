@@ -110,6 +110,12 @@ function menus_attribute_form_alter(array &$form, FormStateInterface $form_state
       '#description' => t('Enter additional styles to be applied to the link.'),
       '#default_value' => $data ? $data->item_style : '',
     ];
+    $form['menu_item_attributes']['menu_item_role'] = [
+      '#type' => 'textfield',
+      '#title' => t('Role'),
+      '#description' => t('Enter additional roles to be applied to the menu item.'),
+      '#default_value' => $data ? $data->item_role : '',
+    ];
     $form['actions']['submit']['#submit'][] = '_menus_attribute_form_submit_handler';
   }
 
