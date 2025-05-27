@@ -96,6 +96,7 @@ class StorageHelper {
         'link_id' => $arr['menu_link_id'],
         'link_name' => $arr['menu_link_name'],
         'link_title' => $arr['menu_link_title'],
+        'link_arialabel' => $arr['menu_link_arialabel'],
         'link_rel' => $arr['menu_link_rel'],
         'link_classes' => $arr['menu_link_class'],
         'link_style' => $arr['menu_link_style'],
