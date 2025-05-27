@@ -5,6 +5,8 @@
  * Provides functions for database.
  */
 
+use Drupal\Core\Database\Database;
+
 /**
  * This will create a table -> menus_attribute with the following fields.
  */
@@ -24,6 +26,10 @@ function menus_attribute_schema() {
         'type' => 'varchar',
         'length' => 128,
         'not null' => TRUE,
+      ],
+      'link_arialabel' => [
+        'type' => 'varchar',
+        'length' => 128,
       ],
       'link_id' => [
         'type' => 'varchar',
@@ -69,4 +75,16 @@ function menus_attribute_schema() {
     'primary key' => ['id'],
   ];
   return $schema;
+}
+
+/**
+ * Adds ARIA Label column to "menus_attribute" table.
+ */
+function menus_attribute_update_8001() {
+  $arialabel = [
+    'type' => 'varchar',
+    'length' => 128,
+  ];
+ $schema = Database::getConnection()->schema();
+ $schema->addField('menus_attribute', 'link_arialabel', $arialabel);
 }

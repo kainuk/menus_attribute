@@ -46,6 +46,9 @@ class TwigExtension extends AbstractExtension {
       if ($data->link_title) {
         $attributes['link']['title'] = $data->link_title;
       }
+      if ($data->link_arialabel) {
+        $attributes['link']['aria-label'] = $data->link_arialabel;
+      }
       if ($data->link_rel) {
         $attributes['link']['rel'] = $data->link_rel;
       }
