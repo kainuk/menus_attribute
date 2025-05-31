@@ -23,7 +23,7 @@ class TwigExtension extends AbstractExtension {
    */
   public function getFunctions(): array {
     return [
-      new TwigFunction('menus_attribute', [$this, 'menusAttribute']),
+      new TwigFunction('menus_attribute', $this->menusAttribute(...)),
       new TwigFunction('test_menu', [$this, 'test']),
     ];
   }
