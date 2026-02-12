@@ -147,8 +147,19 @@ function _menus_attribute_form_submit_handler(&$form, &$form_state): void {
 }
 
 /**
- * Implements hook_theme_registry_alter().
+ * Implements hook_theme().
  */
-function menus_attribute_theme_registry_alter(&$theme_registry): void {
-  $theme_registry['menu']['path'] = \Drupal::service('extension.list.module')->getPath('menus_attribute') . '/templates';
+function menus_attribute_theme($existing, $type, $theme, $path) {
+  return [
+    'menu__menus_attribute' => [
+      'variables' => ['menu_name' => NULL, 'items' => [], 'attributes' => []],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function menus_attribute_theme_suggestions_menu_alter(array &$suggestions, array &$variables) {
+  $suggestions[] = 'menu__menus_attribute';
 }
