@@ -1,0 +1,13 @@
+{
+    "name": "drupal/menus_attribute",
+    "type": "drupal-module",
+    "description": "This simple module allows you to specify some additional attributes for menu items such as id, name, class, style, and rel.",
+    "keywords": ["Drupal", "Menu"],
+    "license": "GPL-2.0+",
+    "homepage": "https://www.drupal.org/project/menus_attribute",
+    "minimum-stability": "dev",
+    "support": {
+      "issues": "https://www.drupal.org/project/issues/menus_attribute",
+      "source": "https://git.drupalcode.org/project/menus_attribute"
+    }
+}
