@@ -1,0 +1,7 @@
+{
+  "name": "drupal/menus_attribute",
+  "type": "drupal-module",
+  "description": "Attributes for menu links",
+  "homepage": "https://www.drupal.org/project/menus_attribute",
+  "minimum-stability": "stable"
+}
